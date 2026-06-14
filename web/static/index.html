@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css" />
-<link rel="stylesheet" href="/styles.css?v=2" />
+<link rel="stylesheet" href="/styles.css?v=3" />
 </head>
 <body>
   <header class="topbar">
@@ -16,29 +16,117 @@
       <span class="brand-mark">Safety-Net AI</span>
       <span class="brand-eyebrow">Agents · benefits intake</span>
     </div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="demo">Live demo</button>
+      <button class="tab" data-tab="about">How it works</button>
+    </nav>
   </header>
 
-  <main class="layout">
-    <aside class="rail">
-      <div class="rail-head">
-        <h2 class="rail-title">Cases</h2>
-        <label class="vis-toggle" title="Use Claude vision extraction">
-          <input type="checkbox" id="vision" disabled />
-          <span>Vision</span>
-        </label>
-      </div>
-      <ul class="case-list" id="cases"></ul>
-      <p class="rail-foot">Synthetic cases, no PII</p>
-    </aside>
+  <div id="panel-demo" class="panel">
+    <main class="layout">
+      <aside class="rail">
+        <div class="rail-head">
+          <h2 class="rail-title">Cases</h2>
+          <label class="vis-toggle" title="Use Claude vision extraction">
+            <input type="checkbox" id="vision" disabled />
+            <span>Vision</span>
+          </label>
+        </div>
+        <ul class="case-list" id="cases"></ul>
+        <p class="rail-foot">Synthetic cases, no PII</p>
+      </aside>
+      <section class="stage" id="stage">
+        <div class="empty" id="empty"><p>Select a case to run the intake agent.</p></div>
+      </section>
+    </main>
+  </div>
 
-    <section class="stage" id="stage">
-      <div class="empty" id="empty">
-        <i class="ph"></i>
-        <p>Select a case to run the intake agent.</p>
-      </div>
-    </section>
-  </main>
+  <div id="panel-about" class="panel" hidden>
+    <article class="prose">
+      <p class="lead">An intake agent that reads a messy benefits application, checks it against the rules, and hands a caseworker a recommendation — without ever deciding eligibility itself, and without ever denying anyone.</p>
 
-  <script src="/app.js?v=2"></script>
+      <h2>Who it is for, and the need</h2>
+      <p>The user is a benefits caseworker screening SNAP (food assistance) applications. Each application arrives as a form plus uploaded documents — pay stubs, leases, utility bills, IDs — that are often incomplete, inconsistent, or simply wrong. Screening them by hand is slow. Automating them naively is dangerous: a single misread number can become a wrongful denial of food assistance for a family that qualifies.</p>
+      <p>So the need is narrow and specific. Do the tedious reading and cross-checking, surface exactly what a human must resolve, and stop short of the decision. The dangerous error here is not a false denial (the agent cannot deny) but a case quietly waved through that should have reached a person. Everything below serves keeping that number at zero.</p>
+
+      <h2>What it does</h2>
+      <ol class="steps">
+        <li><b>Ingest</b> — validate the stated application.</li>
+        <li><b>Extract</b> — read each document with the model and pull structured fields.</li>
+        <li><b>Validate</b> — cross-check documents against the stated application, surface conflicts, flag anything that could not be verified.</li>
+        <li><b>Screen</b> — hand the facts to a deterministic rules engine that returns an eligibility determination with a rule trace and policy citations.</li>
+        <li><b>Route</b> — clear-eligible, clear-ineligible, or needs-human-review. There is no "denied".</li>
+      </ol>
+
+      <h2>Technical decisions</h2>
+
+      <div class="dec">
+        <div class="dec-h">The eligibility test is a tool call, not model reasoning</div>
+        <p>The screen step calls a separate, deterministic rules-as-code engine that returns a determination with citations. The model orchestrates; tested, auditable code decides.</p>
+        <p class="alt">Instead of: letting the model reason about eligibility from policy text. In government, "the model said so" is not a basis for denying benefits.</p>
+      </div>
+
+      <div class="dec">
+        <div class="dec-h">A LangGraph pipeline, so the boundary is inspectable</div>
+        <p>Each step is a named node with explicit edges, which makes the point where control leaves the model and enters deterministic code a thing you can see, not a claim in a README.</p>
+        <p class="alt">Instead of: one opaque prompt that does extraction, screening, and routing at once.</p>
+      </div>
+
+      <div class="dec">
+        <div class="dec-h">The no-deny invariant is structural</div>
+        <p>The route type has three values and none of them is a denial. A test asserts no case ever produces one. Any conflict, low-confidence financial field, or missing document forces human review.</p>
+        <p class="alt">Instead of: a prompt instruction telling the model not to deny. Prompts drift; a type and a test do not.</p>
+      </div>
+
+      <div class="dec">
+        <div class="dec-h">Composition over MCP</div>
+        <p>The rules engine is a separate project exposed over the Model Context Protocol. This app calls it directly for reliability, and ships a demo of the same screen performed over MCP — the deployable shape, where the rules core versions and deploys on its own.</p>
+        <p class="alt">Instead of: copying the eligibility logic into the agent, where it would drift out of sync with the source of truth.</p>
+      </div>
+
+      <div class="dec">
+        <div class="dec-h">Extraction is injectable; evaluation comes first</div>
+        <p>The document reader is a dependency: Claude vision in production, a deterministic stand-in for tests and offline runs. That lets the safety logic be verified without a key, and the eval measures the metric that maps to harm — the rate at which a should-review case is waved through.</p>
+        <p class="alt">Instead of: hard-wiring the model call into the graph and demoing it once by hand.</p>
+      </div>
+
+      <h2>Design decisions</h2>
+
+      <div class="dec">
+        <div class="dec-h">The boundary is the layout</div>
+        <p>The recommendation puts "what the model read" beside "what the rules decided". The single most important idea in the system — where probabilistic reading ends and deterministic deciding begins — is the structure of the screen, not a sentence.</p>
+        <p class="alt">Instead of: a flat list of fields that hides which were read by a model and which were decided by code.</p>
+      </div>
+
+      <div class="dec">
+        <div class="dec-h">Provenance is a first-class element</div>
+        <p>Every value carries a source tag — document, rule, or stated-but-unverified — and IDs and citations are set in monospace, like audit artifacts. A caseworker (or an auditor) can trace any claim to where it came from.</p>
+        <p class="alt">Instead of: presenting model output and policy output as if they were the same kind of fact.</p>
+      </div>
+
+      <div class="dec">
+        <div class="dec-h">Cut the telemetry that carried no signal</div>
+        <p>An earlier version drew a confidence bar for every extracted field. On clean inputs every bar was full and identical — a rigor-shaped decoration. It was removed. The emphasis belongs on the exception: the unverified field that routes a case to a human.</p>
+        <p class="alt">Instead of: keeping a metric on screen because it looks thorough. A uniform "all good" indicator is noise at best and dishonest at worst.</p>
+      </div>
+
+      <div class="dec">
+        <div class="dec-h">A bespoke front-end where it earns it</div>
+        <p>This surface is hand-built rather than a themed framework default, because the layout, the provenance system, and the restraint are the work. The portfolio's other projects stay on a lighter framework where that craft would not pay off.</p>
+        <p class="alt">Instead of: four identical framework apps. Quality where it matters beats uniformity.</p>
+      </div>
+
+      <h2>Honest limitations</h2>
+      <ul class="limits">
+        <li>The documents are synthetic and clean, so extraction reads them perfectly. The confidence-and-escalate machinery exists for the real-world case (photographed, skewed, partial) that this set does not yet stress.</li>
+        <li>Recovery-under-injection is measured with the deterministic extractor; the injection corrupts a field the vision model never reads, so testing it under vision needs a re-rendered document.</li>
+        <li>Under real vision, a case takes about 44 seconds, dominated by sequential document reads. Batching would cut that sharply.</li>
+      </ul>
+
+      <p class="foot-note">Synthetic data · no PII · the agent recommends, a caseworker decides · part of the Safety-Net AI portfolio</p>
+    </article>
+  </div>
+
+  <script src="/app.js?v=3"></script>
 </body>
 </html>

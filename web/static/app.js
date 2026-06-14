@@ -153,4 +153,12 @@ function render(d) {
   `;
 }
 
+document.querySelectorAll(".tab").forEach((t) =>
+  t.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("active", x === t));
+    document.getElementById("panel-demo").hidden = t.dataset.tab !== "demo";
+    document.getElementById("panel-about").hidden = t.dataset.tab !== "about";
+  })
+);
+
 init();
