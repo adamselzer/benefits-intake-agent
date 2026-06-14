@@ -70,20 +70,16 @@ async function select(el, id) {
 function extractedField(spec, data) {
   const found = (data.extracted || []).find((e) => e.name === spec.field);
   if (found && typeof found.value === "number") {
-    const pct = Math.round(found.confidence * 100);
     return `<div class="field">
       <div class="field-top"><span class="field-name">${spec.name}</span><span class="field-val">${money(found.value)}</span></div>
-      <div class="meter">
-        <span class="bar"><i style="width:${pct}%"></i></span>
-        <span class="conf">${found.confidence.toFixed(2)}</span>
-        <span class="chip"><i class="ti ti-file-text"></i> ${spec.doc}</span>
-      </div></div>`;
+      <div class="field-src"><span class="chip"><i class="ti ti-file-text"></i> ${spec.doc}</span></div>
+    </div>`;
   }
   const stated = data.validated && data.validated[spec.key];
   if (stated) {
     return `<div class="field">
       <div class="field-top"><span class="field-name">${spec.name}</span><span class="field-val warn">unverified</span></div>
-      <div class="meter"><span class="chip warn"><i class="ti ti-alert-triangle"></i> No ${spec.doc.toLowerCase()} — stated ${money(stated)} not confirmed</span></div>
+      <div class="field-src"><span class="chip warn"><i class="ti ti-alert-triangle"></i> No ${spec.doc.toLowerCase()} — stated ${money(stated)} not confirmed</span></div>
     </div>`;
   }
   return "";

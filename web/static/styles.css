@@ -83,10 +83,7 @@ body { font-family:var(--sans); color:var(--ink); background:var(--paper);
 .field-name { font-size:13px; color:var(--muted); }
 .field-val { font-family:var(--mono); font-size:14px; }
 .field-val.warn { color:var(--warn); }
-.meter { display:flex; align-items:center; gap:8px; margin-top:7px; }
-.bar { flex:1; height:4px; background:#ECE9E1; border-radius:999px; overflow:hidden; }
-.bar > i { display:block; height:100%; background:var(--accent); }
-.conf { font-size:11px; color:var(--muted-soft); font-family:var(--mono); min-width:30px; }
+.field-src { margin-top:7px; }
 .chip { display:inline-flex; align-items:center; gap:5px; font-size:11px; padding:2px 8px;
   border-radius:6px; background:#F0EEE7; color:#54585E; }
 .chip.warn { background:var(--warn-soft); color:var(--warn); }
