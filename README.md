@@ -65,8 +65,20 @@ pytest                                   # 11 tests
 echo "ANTHROPIC_API_KEY=sk-ant-..." > .env
 python eval/run_eval.py --extractor vision   # real Claude-vision extraction
 python clients/mcp_compose_demo.py           # screen via the rules core over MCP
-streamlit run app/app.py                     # caseworker UI
+
+# Front-ends:
+streamlit run app/app.py                     # quick Streamlit caseworker view
+pip install -e ".[web]" && uvicorn web.server:app --port 8600   # the bespoke caseworker UI
 ```
+
+## The caseworker interface
+
+The hero surface is a bespoke front-end (`web/`, FastAPI + a hand-built UI) rather
+than the default framework look: the deterministic/probabilistic boundary is the
+layout (a "what the model read" track beside a "what the rules decided" track),
+per-field extraction confidence is a first-class element, and every claim carries a
+provenance tag (document / rule / stated-unverified). A lighter Streamlit view
+(`app/app.py`) covers the same recommendation for a quick look.
 
 ## Synthetic data only, never real PII
 
@@ -100,10 +112,13 @@ flagged. The truth-extractor run drives it to zero by construction of the routin
 logic; the failure-injection test corrupts a pay stub and confirms the agent
 escalates rather than guesses.
 
-`python eval/run_eval.py --extractor vision` runs the same harness with real Claude
-vision extraction, which adds extraction field accuracy and exercises the
-uncertainty handling under genuine model error. That run requires a key and is the
-one to watch for the realistic wave-through rate.
+**Real Claude vision extraction** (`--extractor vision`, all 30 cases, captured in
+[`eval/vision_report.md`](eval/vision_report.md)): 0% wrongful wave-through, 0
+denials, 100% conflict-detection recall, 100% route / screening / extraction-field
+accuracy, ~44s/case. Two honest caveats live in that report: extraction is 100%
+because the synthetic PDFs are clean (the confidence machinery is built for degraded
+real documents this set does not yet stress), and recovery-under-injection is a
+truth-extractor metric (the injection corrupts a field vision never reads).
 
 ## Composition
 

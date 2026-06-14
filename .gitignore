@@ -11,6 +11,8 @@ dist/
 # Tooling
 .pytest_cache/
 .ruff_cache/
+# Transient eval run log
+eval/_vision_run.log
 # Generated synthetic case artifacts (regenerable via data/generate_cases.py).
 # Keep the ground-truth labels; ignore the bulky per-case dirs + PDFs.
 data/cases/*

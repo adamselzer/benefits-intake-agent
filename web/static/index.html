@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Benefits intake agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">Safety-Net AI</span>
+      <span class="brand-eyebrow">Agents · benefits intake</span>
+    </div>
+    <div class="topbar-note">The agent recommends. A caseworker decides. It never denies.</div>
+  </header>
+
+  <main class="layout">
+    <aside class="rail">
+      <div class="rail-head">
+        <h2 class="rail-title">Cases</h2>
+        <label class="vis-toggle" title="Use Claude vision extraction">
+          <input type="checkbox" id="vision" disabled />
+          <span>Vision</span>
+        </label>
+      </div>
+      <ul class="case-list" id="cases"></ul>
+      <p class="rail-foot">Synthetic cases, no PII</p>
+    </aside>
+
+    <section class="stage" id="stage">
+      <div class="empty" id="empty">
+        <i class="ph"></i>
+        <p>Select a case to run the intake agent.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

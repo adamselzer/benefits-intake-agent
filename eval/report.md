@@ -18,6 +18,6 @@ Extractor: **truth** (deterministic truth extractor, no API key). Cases: 30.
 | Route accuracy vs labels | 100% |
 | Screening decision accuracy | 100% |
 | Extraction field accuracy (financial) | 100% |
-| Mean latency per case | 0.023s |
+| Mean latency per case | 0.001s |
 
 The wrongful wave-through rate is the headline: a case that should reach a human must never be auto-cleared. Recovery rate shows the same property under injected document corruption. With the truth extractor these isolate the deterministic pipeline; run `--extractor vision` for real extraction accuracy.

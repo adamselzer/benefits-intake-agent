@@ -119,14 +119,19 @@ def main(argv: list[str]) -> int:
         extract_correct += c
         extract_total += t
 
-    # Recovery under injected failures: corrupt clean eligible cases and confirm review.
+    # Recovery under injected failures: corrupt clean eligible cases and confirm
+    # review. This injection corrupts the document's truth field, which only the
+    # deterministic extractor reads; the vision extractor reads the rendered PDF,
+    # so the injection cannot reach it. Recovery is therefore measured only with
+    # the truth extractor (vision recovery would need a re-rendered corrupt PDF).
     recover_total = recover_ok = 0
-    for cd in case_dirs:
-        if labels[cd.name]["scenario"] == "clearly_eligible":
-            recover_total += 1
-            state = graph.invoke(corrupt_pay_stub(load_case(cd)))
-            if state["route"] == "needs_human_review":
-                recover_ok += 1
+    if which == "truth":
+        for cd in case_dirs:
+            if labels[cd.name]["scenario"] == "clearly_eligible":
+                recover_total += 1
+                state = graph.invoke(corrupt_pay_stub(load_case(cd)))
+                if state["route"] == "needs_human_review":
+                    recover_ok += 1
 
     n = len(case_dirs)
     summary = {
@@ -137,7 +142,7 @@ def main(argv: list[str]) -> int:
         "screening_decision_accuracy": round(screen_ok / screen_total, 4) if screen_total else 0.0,
         "extraction_field_accuracy": round(extract_correct / extract_total, 4) if extract_total else 0.0,
         "denials": denials,
-        "recovery_rate": round(recover_ok / recover_total, 4) if recover_total else 0.0,
+        "recovery_rate": round(recover_ok / recover_total, 4) if recover_total else None,
         "mean_latency_s": round(sum(latencies) / len(latencies), 3),
         "n": n,
     }
@@ -154,6 +159,8 @@ def main(argv: list[str]) -> int:
 
 
 def render(s: dict) -> str:
+    recovery = "n/a (truth extractor only — injection corrupts the truth field, not the rendered PDF)" \
+        if s["recovery_rate"] is None else f"{s['recovery_rate']:.0%}"
     return "\n".join([
         "# Eval report — benefits-intake-agent",
         "",
@@ -167,7 +174,7 @@ def render(s: dict) -> str:
         f"| Wrongful wave-through rate (should-review cases routed clear-eligible) | {s['wrongful_wave_through_rate']:.0%} |",
         f"| Denials emitted (no-deny invariant; must be 0) | {s['denials']} |",
         f"| Conflict-detection recall | {s['conflict_detection_recall']:.0%} |",
-        f"| Recovery under injected failures (routed to human) | {s['recovery_rate']:.0%} |",
+        f"| Recovery under injected failures (routed to human) | {recovery} |",
         "",
         "## Quality metrics",
         "",

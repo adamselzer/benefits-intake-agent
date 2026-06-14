@@ -54,4 +54,5 @@ def screen_household(facts: dict[str, Any]) -> dict[str, Any]:
         "snap_citations": determination.citations,
         "ruleset_version": determination.ruleset_version,
         "required_verifications": verifications,
+        "computed": determination.computed,
     }
