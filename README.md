@@ -80,6 +80,12 @@ per-field extraction confidence is a first-class element, and every claim carrie
 provenance tag (document / rule / stated-unverified). A lighter Streamlit view
 (`app/app.py`) covers the same recommendation for a quick look.
 
+It runs on **Civic**, a small design system in the USWDS lineage, elevated past what
+a government site would ship (Source Serif display, an evergreen primary, a warm
+canvas). The system is documented in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) and shown
+live in the app's "Design system" tab; the "How it works" tab is a case-study
+walkthrough of the user, the functionality, and the technical and design decisions.
+
 ## Synthetic data only, never real PII
 
 `data/generate_cases.py` produces 30 cases spanning clearly-eligible,

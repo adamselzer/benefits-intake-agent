@@ -6,9 +6,9 @@
 <title>Benefits intake agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css" />
-<link rel="stylesheet" href="/styles.css?v=3" />
+<link rel="stylesheet" href="/styles.css?v=4" />
 </head>
 <body>
   <header class="topbar">
@@ -19,6 +19,7 @@
     <nav class="tabs">
       <button class="tab active" data-tab="demo">Live demo</button>
       <button class="tab" data-tab="about">How it works</button>
+      <button class="tab" data-tab="system">Design system</button>
     </nav>
   </header>
 
@@ -127,6 +128,74 @@
     </article>
   </div>
 
-  <script src="/app.js?v=3"></script>
+  <div id="panel-system" class="panel" hidden>
+    <div class="guide">
+      <p class="lead">Civic — a design system in the USWDS lineage, elevated.</p>
+      <p class="sub">It keeps what makes the U.S. Web Design System trustworthy — an open civic typeface, grade-based color tokens in semantic roles, an 8px spacing scale, and accessible, plain components — and refines it past what a government site would ship: a serif used for display, an evergreen primary in place of federal blue, a warm-paper canvas, and a tighter type scale.</p>
+
+      <h2>Typography</h2>
+      <h3>Display — Source Serif 4</h3>
+      <div style="font-family:var(--font-serif); font-size:var(--text-3xl); line-height:1.15; margin-bottom:6px;">Eligibility, made legible</div>
+      <h3>UI &amp; body — Source Sans 3</h3>
+      <div class="scale-row"><span class="lab">text-2xl 25</span><span style="font-size:var(--text-2xl)">The agent recommends</span></div>
+      <div class="scale-row"><span class="lab">text-lg 17</span><span style="font-size:var(--text-lg)">A caseworker decides</span></div>
+      <div class="scale-row"><span class="lab">text-md 15</span><span style="font-size:var(--text-md)">Net monthly income is at or below the limit.</span></div>
+      <div class="scale-row"><span class="lab">text-sm 13</span><span style="font-size:var(--text-sm)">Routed to human review.</span></div>
+      <h3>Mono — Roboto Mono (ids, citations, figures)</h3>
+      <div style="font-family:var(--font-mono); font-size:var(--text-sm);">case-021 · 7 CFR 273.9(a)(2) · $1,763</div>
+
+      <h2>Color tokens</h2>
+      <h3>Theme roles</h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip-color" style="background:var(--ink)"></div><div class="meta"><b>ink</b><code>#14181F</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--primary)"></div><div class="meta"><b>primary</b><code>#1F6F5C</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--primary-darker)"></div><div class="meta"><b>primary-darker</b><code>#143F35</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--primary-lighter)"></div><div class="meta"><b>primary-lighter</b><code>#E4F0EC</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--accent-cool)"></div><div class="meta"><b>accent-cool</b><code>#356A82</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--accent-warm)"></div><div class="meta"><b>accent-warm</b><code>#A86F2C</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--base-lightest)"></div><div class="meta"><b>base-lightest</b><code>#F4F2EC</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--paper)"></div><div class="meta"><b>paper</b><code>#FBFAF8</code></div></div>
+      </div>
+      <h3>State colors</h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip-color" style="background:var(--info)"></div><div class="meta"><b>info</b><code>#2E647F</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--success)"></div><div class="meta"><b>success</b><code>#1F6F5C</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--warning)"></div><div class="meta"><b>warning</b><code>#8A5314</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--error)"></div><div class="meta"><b>error</b><code>#963232</code></div></div>
+      </div>
+
+      <h2>Spacing — 8px base unit</h2>
+      <div class="space-row"><span class="lab">s-1 · 8</span><span class="bar" style="width:8px"></span></div>
+      <div class="space-row"><span class="lab">s-2 · 16</span><span class="bar" style="width:16px"></span></div>
+      <div class="space-row"><span class="lab">s-3 · 24</span><span class="bar" style="width:24px"></span></div>
+      <div class="space-row"><span class="lab">s-4 · 32</span><span class="bar" style="width:32px"></span></div>
+      <div class="space-row"><span class="lab">s-6 · 48</span><span class="bar" style="width:48px"></span></div>
+      <div class="space-row"><span class="lab">s-8 · 64</span><span class="bar" style="width:64px"></span></div>
+
+      <h2>Components</h2>
+      <h3>Buttons</h3>
+      <div class="specimen"><button class="btn btn-primary">Run intake agent</button><button class="btn btn-outline">Cancel</button></div>
+      <h3>Tags</h3>
+      <div class="specimen"><span class="chip"><i class="ti ti-file-text"></i> Lease</span><span class="chip mono">BEM 213</span><span class="chip warn"><i class="ti ti-alert-triangle"></i> unverified</span></div>
+      <h3>Alerts</h3>
+      <div class="alert info"><i class="ti ti-info-circle"></i><span>Screening only — not a determination.</span></div>
+      <div class="alert success"><i class="ti ti-check"></i><span>Eligible on stated income.</span></div>
+      <div class="alert warning"><i class="ti ti-alert-triangle"></i><span>Income claimed but unverified — routed to human review.</span></div>
+      <div class="alert error"><i class="ti ti-x"></i><span>Malformed application — cannot screen.</span></div>
+      <h3>Summary box</h3>
+      <div class="summary-box">Routed to human review: one document conflicts with the stated application. The agent does not decide; a caseworker will.</div>
+      <h3>Step indicator</h3>
+      <div class="flow" style="margin-top:12px;">
+        <span class="node"><b>1</b><span>ingest</span></span><span class="seg"></span>
+        <span class="node"><b>2</b><span>extract</span></span><span class="seg"></span>
+        <span class="node boundary"><b>3</b><span>screen</span></span><span class="seg"></span>
+        <span class="node"><b>4</b><span>route</span></span>
+      </div>
+
+      <p class="foot-note">Full token reference and rationale: see DESIGN_SYSTEM.md in the repository.</p>
+    </div>
+  </div>
+
+  <script src="/app.js?v=4"></script>
 </body>
 </html>
