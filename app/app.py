@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import streamlit as st
 
+from app._ui import apply_theme, footer, header
 from src.config import has_llm
 from src.graph import build_graph, default_extractor, load_case
 from src.tools.extraction import truth_extractor
@@ -33,11 +34,14 @@ ROUTE_STYLE = {
 }
 
 st.set_page_config(page_title="Benefits intake agent", layout="wide")
-st.title("Benefits intake agent — caseworker recommendation")
-st.caption(
+apply_theme(st)
+header(
+    st,
+    "Safety-Net AI · Agents",
+    "Benefits intake agent",
     "The agent reads the application and verification documents, screens via a "
-    "deterministic rules core, and hands you a recommendation. It never denies and "
-    "never auto-clears a case that should be reviewed."
+    "deterministic rules core, and hands a caseworker a recommendation. It never "
+    "denies, and never auto-clears a case that should be reviewed.",
 )
 
 case_dirs = sorted(p.name for p in CASES.glob("case-*"))
@@ -85,3 +89,5 @@ if st.button("Run intake agent", type="primary"):
 
     st.subheader("Program screen (from the rules core)")
     st.json(packet["screen"])
+
+footer(st, "Synthetic cases, no PII · the agent recommends, a caseworker decides")
