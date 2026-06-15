@@ -37,7 +37,10 @@ def civil_showcase() -> FileResponse:
 @app.get("/api/cases")
 def list_cases() -> list[dict]:
     labels = json.loads((CASES / "labels.json").read_text())["cases"]
-    return [{"id": c["case_id"], "scenario": c["scenario"]} for c in labels]
+    return [
+        {"id": c["case_id"], "scenario": c["scenario"], "route": c["expected_route"]}
+        for c in labels
+    ]
 
 
 @app.get("/api/status")
