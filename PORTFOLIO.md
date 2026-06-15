@@ -20,7 +20,7 @@ to look.
 ## Why it matters in this domain
 
 This is the highest-demand, least-solved pattern in applied AI, and the safety-net
-framing is where it earns its seat. An intake agent that auto-denies on a misread
+setting is where its hard parts surface. An intake agent that auto-denies on a misread
 number does real harm, so productivity is never the first concern. The questions
 that matter are what happens when extraction is wrong, how you bound that error, and
 where you hand control back to code. The whole design is an answer to those.
