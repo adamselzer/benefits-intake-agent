@@ -1,6 +1,4 @@
 # Secrets
-.env
-.env.*
 # Python
 __pycache__/
 *.py[cod]
@@ -19,3 +17,5 @@ data/cases/*
 !data/cases/labels.json
 # OS
 .DS_Store
+config.bat
+node_modules
