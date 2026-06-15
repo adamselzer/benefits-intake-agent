@@ -86,6 +86,10 @@ canvas). The system is documented in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) and sh
 live in the app's "Design system" tab; the "How it works" tab is a case-study
 walkthrough of the user, the functionality, and the technical and design decisions.
 
+The product framing and information architecture — that this is a document-intake
+**triage layer** (not a standalone app a caseworker opens), its organization,
+labeling, and navigation — are set out in [INFORMATION_ARCHITECTURE.md](INFORMATION_ARCHITECTURE.md).
+
 ## Synthetic data only, never real PII
 
 `data/generate_cases.py` produces 30 cases spanning clearly-eligible,
