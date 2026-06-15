@@ -1,6 +1,6 @@
-# Civic — a design system in the USWDS lineage, elevated
+# Civil — a design system in the USWDS lineage, elevated
 
-The caseworker front-end (`web/`) is built on a small design system called **Civic**.
+The caseworker front-end (`web/`) is built on a small design system called **Civil**.
 It is a deliberate derivative of the [U.S. Web Design System](https://designsystem.digital.gov/)
 (USWDS): it keeps the qualities that make government interfaces trustworthy and
 accessible, and refines them past what a government site would actually ship. The
@@ -8,29 +8,31 @@ goal is something a veteran design engineer recognizes as "in the canon," done w
 more care than the canon usually gets.
 
 This document is the outlay of the system: what it inherits, what it changes and
-why, and the full token and component reference. The `Design system` tab in the app
-renders the same system in its own language.
+why, and the full token and component reference. A live **showcase page** with
+principles, rationale, and component usage is served at **`/civil`** (and the
+`Design system` tab in the app links to it); both render the system in its own
+language.
 
 ## What it inherits from USWDS (the canon)
 
 - **An open, civic typeface.** USWDS ships on Source Sans (and its sibling
-  Public Sans). Civic uses **Source Sans 3** for all UI and body text. It reads as
+  Public Sans). Civil uses **Source Sans 3** for all UI and body text. It reads as
   a public-sector interface, not a startup landing page.
 - **Grade-based color tokens in semantic roles.** USWDS separates *system* colors
   (families × grades) from *theme* colors (roles: base, ink, primary, accent-cool,
-  accent-warm, plus state colors). Civic keeps the role structure and the grade idea
+  accent-warm, plus state colors). Civil keeps the role structure and the grade idea
   (darker / DEFAULT / lighter per family).
-- **An 8px spacing scale.** USWDS spacing is multiples of 8px. Civic uses the same
+- **An 8px spacing scale.** USWDS spacing is multiples of 8px. Civil uses the same
   base unit and a numeric scale (`s-1` = 8px, `s-2` = 16px, …).
 - **The signature components.** USWDS's summary box, alert, tag, and step indicator
-  are the components that carry government UIs. Civic implements all four.
+  are the components that carry government UIs. Civil implements all four.
 - **Accessibility first.** Color pairings clear WCAG AA contrast; every interactive
   element has a visible focus ring; nothing relies on color alone (icons and text
   accompany every state).
 
 ## What it elevates (past what government ships)
 
-| Decision | USWDS default | Civic | Why |
+| Decision | USWDS default | Civil | Why |
 |---|---|---|---|
 | Display type | Merriweather, rarely used well | **Source Serif 4** for display headings | A serif used with intent signals editorial care; the Source super-family keeps it cohesive with the body sans. |
 | Primary color | Saturated federal blue (`#005ea2`) | **Evergreen `#1F6F5C`** | Calmer and more humane than institutional blue, still unmistakably civic. |
@@ -39,7 +41,7 @@ renders the same system in its own language.
 | Density | Generous, form-first | **Considered, content-first** | Optimized for reading a determination, not filling a form. |
 
 The line it holds: every change is a refinement within the idiom, not a departure
-from it. A government team could adopt Civic without leaving the hymnal.
+from it. A government team could adopt Civil without leaving the hymnal.
 
 ## Tokens
 
@@ -87,7 +89,7 @@ from it. A government team could adopt Civic without leaving the hymnal.
 
 ## Where it is applied
 
-Civic is implemented in `web/static/styles.css` as CSS custom properties (the
+Civil is implemented in `web/static/styles.css` as CSS custom properties (the
 tokens) plus component classes, and shown end-to-end in the caseworker UI. The
 portfolio's Streamlit apps carry the same palette and type direction for family
 resemblance, but the full component system lives here, where a hand-built front-end

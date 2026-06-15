@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Civil — a design system for civic AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="/styles.css?v=5" />
+<style>
+  .cv-nav { position:sticky; top:0; z-index:5; display:flex; align-items:center; justify-content:space-between;
+    padding:14px 36px; background:rgba(251,250,248,0.9); backdrop-filter:saturate(1.2) blur(8px);
+    border-bottom:1px solid var(--line); }
+  .cv-nav .wm { font-family:var(--font-serif); font-size:var(--text-xl); font-weight:600; }
+  .cv-nav .wm em { font-style:normal; color:var(--primary); }
+  .cv-nav .links a { color:var(--base); text-decoration:none; font-size:var(--text-sm); margin-left:var(--s-3); }
+  .cv-nav .links a:hover { color:var(--ink); }
+  .wrap { max-width:920px; margin:0 auto; padding:0 36px; }
+  .hero { padding:var(--s-8) 0 var(--s-6); border-bottom:1px solid var(--line-soft); }
+  .hero .eyebrow { font-size:var(--text-xs); letter-spacing:0.16em; text-transform:uppercase; color:var(--primary); font-weight:600; }
+  .hero h1 { font-family:var(--font-serif); font-size:54px; line-height:1.04; font-weight:600; letter-spacing:-0.015em; margin:10px 0 14px; }
+  .hero .deck { font-size:var(--text-xl); line-height:1.5; color:var(--base-dark); max-width:62ch; font-weight:400; margin:0; }
+  .hero .lineage { margin-top:var(--s-3); font-size:var(--text-sm); color:var(--base); }
+  section.cv { padding:var(--s-6) 0; border-bottom:1px solid var(--line-soft); }
+  section.cv > h2 { font-family:var(--font-serif); font-size:var(--text-2xl); font-weight:600; margin:0 0 6px; letter-spacing:-0.01em; }
+  section.cv > .intro { font-size:var(--text-md); color:var(--base-dark); max-width:64ch; line-height:1.66; margin:0 0 var(--s-3); }
+  .principles { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:var(--s-2); }
+  .principle { border:1px solid var(--line); border-radius:var(--radius-md); padding:var(--s-2) var(--s-2); background:var(--surface); }
+  .principle i { color:var(--primary); font-size:20px; }
+  .principle h3 { font-size:var(--text-md); font-weight:600; margin:8px 0 4px; }
+  .principle p { font-size:var(--text-sm); color:var(--base-dark); line-height:1.55; margin:0; }
+  table.lineage { width:100%; border-collapse:collapse; font-size:var(--text-sm); }
+  table.lineage th, table.lineage td { text-align:left; vertical-align:top; padding:10px 12px; border-bottom:1px solid var(--line-soft); }
+  table.lineage th { font-weight:600; color:var(--base); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.06em; }
+  table.lineage td b { color:var(--primary-darker); }
+  .specimen-type > div { padding:10px 0; border-bottom:1px solid var(--line-soft); display:flex; align-items:baseline; gap:var(--s-2); }
+  .specimen-type .lab { font-family:var(--font-mono); font-size:var(--text-xs); color:var(--base); width:150px; flex-shrink:0; }
+  .comp { border:1px solid var(--line); border-radius:var(--radius-md); padding:var(--s-2) var(--s-3); margin:var(--s-2) 0; background:var(--surface); }
+  .comp h3 { font-size:var(--text-md); font-weight:600; margin:0 0 4px; }
+  .comp .use { font-size:var(--text-sm); color:var(--base-dark); margin:0 0 var(--s-2); max-width:62ch; line-height:1.55; }
+  .comp .demo { padding:var(--s-2); background:var(--base-lightest); border-radius:var(--radius-sm); margin-bottom:var(--s-2); }
+  .dodont { display:grid; grid-template-columns:1fr 1fr; gap:var(--s-2); }
+  @media (max-width:640px){ .dodont { grid-template-columns:1fr; } }
+  .dodont div { font-size:var(--text-sm); line-height:1.5; }
+  .dodont .do b { color:var(--primary-darker); } .dodont .dont b { color:var(--error); }
+  pre.code { background:var(--ink); color:#E8EAE6; border-radius:var(--radius-md); padding:var(--s-2) var(--s-3);
+    font-family:var(--font-mono); font-size:var(--text-sm); overflow:auto; line-height:1.6; }
+  pre.code .tok { color:#8FD0BF; }
+  .cv-foot { padding:var(--s-5) 0 var(--s-8); color:var(--base); font-size:var(--text-sm); }
+  .cv-foot a { color:var(--primary-dark); }
+</style>
+</head>
+<body>
+  <nav class="cv-nav">
+    <span class="wm">Civ<em>il</em></span>
+    <span class="links">
+      <a href="#principles">Principles</a>
+      <a href="#lineage">Lineage</a>
+      <a href="#type">Type</a>
+      <a href="#color">Color</a>
+      <a href="#components">Components</a>
+      <a href="#using">Using</a>
+      <a href="/">↗ Live app</a>
+    </span>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">Design system · Safety-Net AI</div>
+      <h1>Civil</h1>
+      <p class="deck">A design system for software that decides things about people's lives. It is built on the conviction that in public-benefits tools, clarity is a safety feature and a citation is not decoration.</p>
+      <p class="lineage">In the lineage of the <a href="https://designsystem.digital.gov/">U.S. Web Design System</a>, refined past what a government site would ship.</p>
+    </header>
+
+    <section class="cv" id="principles">
+      <h2>Principles</h2>
+      <p class="intro">Four convictions decide every token and component below. They come before the rules, because the rules are downstream of them.</p>
+      <div class="principles">
+        <div class="principle"><i class="ti ti-eye-check" aria-hidden="true"></i><h3>Clarity is a safety feature</h3><p>A misread notice can cost someone their benefits. Legibility is not aesthetics here; it is harm reduction.</p></div>
+        <div class="principle"><i class="ti ti-route" aria-hidden="true"></i><h3>Provenance over polish</h3><p>Every figure shows where it came from — a document, a rule, an unverified claim. Sourcing is a first-class visual element.</p></div>
+        <div class="principle"><i class="ti ti-minus" aria-hidden="true"></i><h3>Restraint</h3><p>One accent, real whitespace, no decoration that performs rigor it does not carry. If a metric does not vary, it does not earn pixels.</p></div>
+        <div class="principle"><i class="ti ti-accessible" aria-hidden="true"></i><h3>Accessible by default</h3><p>AA contrast, visible focus, and never color alone. Inherited from the canon, kept non-negotiable.</p></div>
+      </div>
+    </section>
+
+    <section class="cv" id="lineage">
+      <h2>Why a derivative of USWDS</h2>
+      <p class="intro">The U.S. Web Design System is the most battle-tested civic design language there is: accessible, plain, and trusted. Civil keeps what makes it trustworthy and refines what makes it feel like a form from 2015. Every change is a move within the idiom, not away from it — a government team could adopt Civil without leaving the hymnal.</p>
+      <table class="lineage">
+        <tr><th>Decision</th><th>USWDS</th><th>Civil</th><th>Why</th></tr>
+        <tr><td>Display type</td><td>Merriweather, rarely used well</td><td><b>Source Serif 4</b> for display</td><td>A serif used with intent signals editorial care; the Source super-family stays cohesive with the body sans.</td></tr>
+        <tr><td>Primary color</td><td>Saturated federal blue</td><td><b>Evergreen #1F6F5C</b></td><td>Calmer and more humane than institutional blue, still unmistakably civic.</td></tr>
+        <tr><td>Canvas</td><td>White / cool gray</td><td><b>Warm paper #FBFAF8</b></td><td>Softer, less clinical; easier for long case review.</td></tr>
+        <tr><td>Type scale</td><td>Broad, utilitarian</td><td><b>Tighter ~1.2 scale</b></td><td>More refined hierarchy; less shouting.</td></tr>
+        <tr><td>Density</td><td>Form-first</td><td><b>Content-first</b></td><td>Optimized for reading a determination, not filling a form.</td></tr>
+      </table>
+    </section>
+
+    <section class="cv" id="type">
+      <h2>Typography</h2>
+      <p class="intro">Source Sans 3 for everything you operate, Source Serif 4 for the things you read, Roboto Mono for the things you cite. The serif is the elevation: government interfaces almost never trust a serif, and used only for display it reads as care, not nostalgia.</p>
+      <div class="specimen-type">
+        <div><span class="lab">serif · display</span><span style="font-family:var(--font-serif); font-size:31px; line-height:1.1;">Eligibility, made legible</span></div>
+        <div><span class="lab">sans · text-lg 17</span><span style="font-size:var(--text-lg);">The agent recommends; a caseworker decides.</span></div>
+        <div><span class="lab">sans · text-md 15</span><span style="font-size:var(--text-md);">Net monthly income is at or below the limit for a household of two.</span></div>
+        <div><span class="lab">mono · figures</span><span style="font-family:var(--font-mono); font-size:var(--text-sm);">case-021 · 7 CFR 273.9(a)(2) · $1,763</span></div>
+      </div>
+    </section>
+
+    <section class="cv" id="color">
+      <h2>Color</h2>
+      <p class="intro">Tokens are roles, not paint: <code>primary</code>, <code>ink</code>, <code>base</code>, the warm accents, and the state colors. Color always carries meaning — success, caution, error — and never decorates. Every pairing clears AA contrast.</p>
+      <h3 style="font-size:var(--text-sm); color:var(--base); text-transform:uppercase; letter-spacing:0.04em; margin:0 0 10px;">Theme roles</h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip-color" style="background:var(--ink)"></div><div class="meta"><b>ink</b><code>#14181F</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--primary)"></div><div class="meta"><b>primary</b><code>#1F6F5C</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--primary-darker)"></div><div class="meta"><b>primary-darker</b><code>#143F35</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--primary-lighter)"></div><div class="meta"><b>primary-lighter</b><code>#E4F0EC</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--accent-cool)"></div><div class="meta"><b>accent-cool</b><code>#356A82</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--accent-warm)"></div><div class="meta"><b>accent-warm</b><code>#A86F2C</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--base-lightest)"></div><div class="meta"><b>base-lightest</b><code>#F4F2EC</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--paper)"></div><div class="meta"><b>paper</b><code>#FBFAF8</code></div></div>
+      </div>
+      <h3 style="font-size:var(--text-sm); color:var(--base); text-transform:uppercase; letter-spacing:0.04em; margin:18px 0 10px;">State</h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip-color" style="background:var(--info)"></div><div class="meta"><b>info</b><code>#2E647F</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--success)"></div><div class="meta"><b>success</b><code>#1F6F5C</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--warning)"></div><div class="meta"><b>warning</b><code>#8A5314</code></div></div>
+        <div class="sw"><div class="chip-color" style="background:var(--error)"></div><div class="meta"><b>error</b><code>#963232</code></div></div>
+      </div>
+      <h3 style="font-size:var(--text-sm); color:var(--base); text-transform:uppercase; letter-spacing:0.04em; margin:18px 0 10px;">Space — 8px base</h3>
+      <div class="space-row"><span class="lab">s-1 · 8</span><span class="bar" style="width:8px"></span></div>
+      <div class="space-row"><span class="lab">s-2 · 16</span><span class="bar" style="width:16px"></span></div>
+      <div class="space-row"><span class="lab">s-3 · 24</span><span class="bar" style="width:24px"></span></div>
+      <div class="space-row"><span class="lab">s-4 · 32</span><span class="bar" style="width:32px"></span></div>
+      <div class="space-row"><span class="lab">s-6 · 48</span><span class="bar" style="width:48px"></span></div>
+    </section>
+
+    <section class="cv" id="components">
+      <h2>Components</h2>
+      <p class="intro">Civil keeps the four components that carry civic interfaces, each with a clear job and a clear edge.</p>
+
+      <div class="comp">
+        <h3>Summary box</h3>
+        <p class="use">The headline outcome of a page, set apart. Use it for the one thing a reader must take away — here, the recommendation and its reason.</p>
+        <div class="demo"><div class="summary-box">Routed to human review: one document conflicts with the stated application. The agent does not decide; a caseworker will.</div></div>
+        <div class="dodont">
+          <div class="do"><b>Do</b> use one per view, at the top, for the decisive takeaway.</div>
+          <div class="dont"><b>Avoid</b> stacking several — if everything is summarized, nothing is.</div>
+        </div>
+      </div>
+
+      <div class="comp">
+        <h3>Alert</h3>
+        <p class="use">A state that needs attention, in four meanings. The left bar and icon carry the meaning so it never rests on color alone.</p>
+        <div class="demo">
+          <div class="alert info"><i class="ti ti-info-circle"></i><span>Screening only — not a determination.</span></div>
+          <div class="alert success"><i class="ti ti-check"></i><span>Eligible on stated income.</span></div>
+          <div class="alert warning"><i class="ti ti-alert-triangle"></i><span>Income claimed but unverified — routed to human review.</span></div>
+          <div class="alert error"><i class="ti ti-x"></i><span>Malformed application — cannot screen.</span></div>
+        </div>
+        <div class="dodont">
+          <div class="do"><b>Do</b> match the state to real severity; reserve error for blocking failures.</div>
+          <div class="dont"><b>Avoid</b> warning-by-default; an alert that is always on is ignored.</div>
+        </div>
+      </div>
+
+      <div class="comp">
+        <h3>Tag</h3>
+        <p class="use">A small label for provenance, citations, and categories. Mono tags read as artifacts you can trust and trace.</p>
+        <div class="demo"><span class="chip"><i class="ti ti-file-text"></i> Lease</span> <span class="chip mono">BEM 213</span> <span class="chip warn"><i class="ti ti-alert-triangle"></i> unverified</span></div>
+        <div class="dodont">
+          <div class="do"><b>Do</b> use a tag to show where a value came from.</div>
+          <div class="dont"><b>Avoid</b> tags as decoration with no referent.</div>
+        </div>
+      </div>
+
+      <div class="comp">
+        <h3>Step indicator</h3>
+        <p class="use">Progress through a defined process, with the meaningful step emphasized. Here it makes the agent pipeline — and its deterministic boundary — visible.</p>
+        <div class="demo"><div class="flow">
+          <span class="node"><b>1</b><span>ingest</span></span><span class="seg"></span>
+          <span class="node"><b>2</b><span>extract</span></span><span class="seg"></span>
+          <span class="node boundary"><b>3</b><span>screen</span></span><span class="seg"></span>
+          <span class="node"><b>4</b><span>route</span></span>
+        </div></div>
+        <div class="dodont">
+          <div class="do"><b>Do</b> emphasize the step that matters most to the reader.</div>
+          <div class="dont"><b>Avoid</b> using it for steps the user cannot see or affect.</div>
+        </div>
+      </div>
+
+      <div class="comp">
+        <h3>Buttons</h3>
+        <p class="use">One filled primary for the main action, an outline default for the rest. At most one primary per view.</p>
+        <div class="demo"><button class="btn btn-primary">Run intake agent</button> <button class="btn btn-outline">Cancel</button></div>
+      </div>
+    </section>
+
+    <section class="cv" id="using">
+      <h2>Using Civil</h2>
+      <p class="intro">The system is a set of CSS custom properties — the tokens — plus component classes. Build with the tokens, never raw hex, so a palette or scale change is one edit. Reference the role, not the value:</p>
+      <pre class="code"><span class="tok">.recommendation</span> {
+  color: <span class="tok">var(--ink)</span>;
+  background: <span class="tok">var(--surface)</span>;
+  border-left: 3px solid <span class="tok">var(--primary)</span>;
+  padding: <span class="tok">var(--s-2)</span>;
+  border-radius: <span class="tok">var(--radius-md)</span>;
+}</pre>
+      <p class="intro" style="margin-top:var(--s-2);">Civil is implemented end-to-end in this caseworker app (<code>web/static/styles.css</code>) and documented in <a href="https://github.com/adamselzer/benefits-intake-agent/blob/main/DESIGN_SYSTEM.md">DESIGN_SYSTEM.md</a>. The portfolio's other tools carry the same type and palette for family resemblance; the full component system lives here, where a hand-built front-end can express it.</p>
+    </section>
+
+    <footer class="cv-foot">
+      Civil · part of the <b>Safety-Net AI</b> portfolio · in the lineage of the
+      <a href="https://designsystem.digital.gov/">U.S. Web Design System</a> ·
+      <a href="/">open the live app ↗</a>
+    </footer>
+  </div>
+</body>
+</html>

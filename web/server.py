@@ -15,6 +15,7 @@ import json
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from src.config import has_llm
@@ -25,6 +26,12 @@ WEB = Path(__file__).resolve().parent
 CASES = WEB.parent / "data" / "cases"
 
 app = FastAPI(title="benefits-intake-agent")
+
+
+@app.get("/civil")
+def civil_showcase() -> FileResponse:
+    """The Civil design system showcase page."""
+    return FileResponse(WEB / "static" / "civil.html")
 
 
 @app.get("/api/cases")
