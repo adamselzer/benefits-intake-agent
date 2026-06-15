@@ -1,4 +1,4 @@
-# Civil — a design system in the USWDS lineage, elevated
+# Civil: a design system in the USWDS lineage, elevated
 
 The caseworker front-end (`web/`) is built on a small design system called **Civil**.
 It is a deliberate derivative of the [U.S. Web Design System](https://designsystem.digital.gov/)
@@ -17,7 +17,7 @@ language.
 
 - **An open, civic typeface.** USWDS ships on Source Sans (and its sibling
   Public Sans). Civil uses **Source Sans 3** for all UI and body text. It reads as
-  a public-sector interface, not a startup landing page.
+  a public-sector interface, with the restraint that implies.
 - **Grade-based color tokens in semantic roles.** USWDS separates *system* colors
   (families × grades) from *theme* colors (roles: base, ink, primary, accent-cool,
   accent-warm, plus state colors). Civil keeps the role structure and the grade idea
@@ -38,23 +38,23 @@ language.
 | Primary color | Saturated federal blue (`#005ea2`) | **Evergreen `#1F6F5C`** | Calmer and more humane than institutional blue, still unmistakably civic. |
 | Canvas | White / cool gray | **Warm paper `#FBFAF8`** | Softer, less clinical; easier on the eye for long case review. |
 | Type scale | Broad, utilitarian | **Tighter ~1.2 modular scale** | More refined hierarchy; less shouting. |
-| Density | Generous, form-first | **Considered, content-first** | Optimized for reading a determination, not filling a form. |
+| Density | Generous, form-first | **Considered, content-first** | Optimized for reading a determination, where a form layout would waste the space. |
 
-The line it holds: every change is a refinement within the idiom, not a departure
-from it. A government team could adopt Civil without leaving the hymnal.
+The line it holds: every change is a refinement within the idiom. A government
+team could adopt Civil without leaving the hymnal.
 
 ## Tokens
 
 ### Type roles
-- `--font-sans` Source Sans 3 — UI and body
-- `--font-serif` Source Serif 4 — display headings, lead paragraphs
-- `--font-mono` Roboto Mono — ids, citations, dollar figures (the audit artifacts)
+- `--font-sans` Source Sans 3: UI and body
+- `--font-serif` Source Serif 4: display headings, lead paragraphs
+- `--font-mono` Roboto Mono: ids, citations, dollar figures (the audit artifacts)
 
 ### Type scale
 `--text-xs` 11.5 · `--text-sm` 13 · `--text-md` 15 (base) · `--text-lg` 17 ·
 `--text-xl` 20 · `--text-2xl` 25 · `--text-3xl` 31. Body line-height 1.55–1.66.
 
-### Color — theme roles
+### Color: theme roles
 - `--ink` `#14181F` · `--base-dark` `#3D4654` · `--base` `#697078` ·
   `--base-light` `#A6AAB0` · `--base-lighter` `#DAD6CC` · `--base-lightest` `#F4F2EC`
 - `--paper` `#FBFAF8` · `--surface` `#FFFFFF`
@@ -62,13 +62,13 @@ from it. A government team could adopt Civil without leaving the hymnal.
   · `--primary-light` `#6BA597` · `--primary-lighter` `#E4F0EC`
 - `--accent-cool` `#356A82` · `--accent-warm` `#A86F2C`
 
-### Color — state (each with a tint for backgrounds)
+### Color: state (each with a tint for backgrounds)
 - `--info` `#2E647F` / `--info-bg` `#E7EEF2`
 - `--success` `#1F6F5C` / `--success-bg` `#E4F0EC`
 - `--warning` `#8A5314` / `--warning-bg` `#F6ECD8`
 - `--error` `#963232` / `--error-bg` `#F6E7E4`
 
-### Spacing — 8px base
+### Spacing: 8px base
 `--s-05` 4 · `--s-1` 8 · `--s-2` 16 · `--s-3` 24 · `--s-4` 32 · `--s-6` 48 · `--s-8` 64
 
 ### Radius & focus
@@ -76,16 +76,16 @@ from it. A government team could adopt Civil without leaving the hymnal.
 
 ## Components
 
-- **Summary box** — tinted panel with a primary left rule; carries the headline
+- **Summary box**: tinted panel with a primary left rule; carries the headline
   recommendation.
-- **Alert** — left accent bar + tinted background + icon, in four states
+- **Alert**: left accent bar + tinted background + icon, in four states
   (info / success / warning / error). Used for review items and status.
-- **Tag** — small labeled chip for provenance (source document), citations (mono),
+- **Tag**: small labeled chip for provenance (source document), citations (mono),
   and scenario labels.
-- **Step indicator** — numbered steps with connectors and an emphasized current
+- **Step indicator**: numbered steps with connectors and an emphasized current
   step; renders the agent pipeline (ingest → extract → screen → route).
-- **Button** — filled primary and outline default.
-- **Card** — surface with a hairline border and `radius-md`.
+- **Button**: filled primary and outline default.
+- **Card**: surface with a hairline border and `radius-md`.
 
 ## Where it is applied
 

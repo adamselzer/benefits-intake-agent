@@ -37,13 +37,14 @@ a small, inspectable graph with the model confined to the step it is genuinely g
 at (reading messy documents) and control handed back to deterministic code for the
 decision.
 
-## The hard parts (built visibly, not hidden)
+## The hard parts (built in the open)
 
 1. **Extraction uncertainty.** Every extracted field carries a confidence. A
    low-confidence financial field never flows silently into a screen; it raises a
    flag and forces human review.
 2. **The deterministic handback.** The eligibility test is a call into tested,
-   cited code, not model judgment. The boundary is a named node in the graph.
+   cited code. The model orchestrates; the code decides. The boundary is a named
+   node in the graph.
 3. **Conflict detection.** When the stated income disagrees with the pay stub, the
    agent surfaces the conflict instead of silently picking one.
 4. **The no-deny invariant.** Structural: the route enum has no denial value, and a
@@ -86,9 +87,10 @@ canvas). The system is documented in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) and sh
 live in the app's "Design system" tab; the "How it works" tab is a case-study
 walkthrough of the user, the functionality, and the technical and design decisions.
 
-The product framing and information architecture — that this is a document-intake
-**triage layer** (not a standalone app a caseworker opens), its organization,
-labeling, and navigation — are set out in [INFORMATION_ARCHITECTURE.md](INFORMATION_ARCHITECTURE.md).
+The product framing and information architecture are set out in
+[INFORMATION_ARCHITECTURE.md](INFORMATION_ARCHITECTURE.md): the document-intake
+**triage layer** model (the tool runs on incoming applications rather than being
+opened case by case), plus its organization, labeling, and navigation.
 
 ## Synthetic data only, never real PII
 

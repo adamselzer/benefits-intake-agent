@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Civil — a design system for civic AI</title>
+<title>Civil: a design system for civic AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -70,7 +70,7 @@
     <header class="hero">
       <div class="eyebrow">Design system · Safety-Net AI</div>
       <h1>Civil</h1>
-      <p class="deck">A design system for software that decides things about people's lives. It is built on the conviction that in public-benefits tools, clarity is a safety feature and a citation is not decoration.</p>
+      <p class="deck">A design system for software that decides things about people's lives. It is built on the conviction that in public-benefits tools, clarity is a safety feature and a citation carries weight.</p>
       <p class="lineage">In the lineage of the <a href="https://designsystem.digital.gov/">U.S. Web Design System</a>, refined past what a government site would ship.</p>
     </header>
 
@@ -78,8 +78,8 @@
       <h2>Principles</h2>
       <p class="intro">Four convictions decide every token and component below. They come before the rules, because the rules are downstream of them.</p>
       <div class="principles">
-        <div class="principle"><i class="ti ti-eye-check" aria-hidden="true"></i><h3>Clarity is a safety feature</h3><p>A misread notice can cost someone their benefits. Legibility is not aesthetics here; it is harm reduction.</p></div>
-        <div class="principle"><i class="ti ti-route" aria-hidden="true"></i><h3>Provenance over polish</h3><p>Every figure shows where it came from — a document, a rule, an unverified claim. Sourcing is a first-class visual element.</p></div>
+        <div class="principle"><i class="ti ti-eye-check" aria-hidden="true"></i><h3>Clarity is a safety feature</h3><p>A misread notice can cost someone their benefits. Here legibility is harm reduction.</p></div>
+        <div class="principle"><i class="ti ti-route" aria-hidden="true"></i><h3>Provenance over polish</h3><p>Every figure shows where it came from: a document, a rule, or an unverified claim. Sourcing is a first-class visual element.</p></div>
         <div class="principle"><i class="ti ti-minus" aria-hidden="true"></i><h3>Restraint</h3><p>One accent, real whitespace, no decoration that performs rigor it does not carry. If a metric does not vary, it does not earn pixels.</p></div>
         <div class="principle"><i class="ti ti-accessible" aria-hidden="true"></i><h3>Accessible by default</h3><p>AA contrast, visible focus, and never color alone. Inherited from the canon, kept non-negotiable.</p></div>
       </div>
@@ -87,20 +87,20 @@
 
     <section class="cv" id="lineage">
       <h2>Why a derivative of USWDS</h2>
-      <p class="intro">The U.S. Web Design System is the most battle-tested civic design language there is: accessible, plain, and trusted. Civil keeps what makes it trustworthy and refines what makes it feel like a form from 2015. Every change is a move within the idiom, not away from it — a government team could adopt Civil without leaving the hymnal.</p>
+      <p class="intro">The U.S. Web Design System is the most battle-tested civic design language there is: accessible, plain, and trusted. Civil keeps what makes it trustworthy and refines what makes it feel like a form from 2015. Every change stays within the idiom. A government team could adopt Civil without leaving the hymnal.</p>
       <table class="lineage">
         <tr><th>Decision</th><th>USWDS</th><th>Civil</th><th>Why</th></tr>
         <tr><td>Display type</td><td>Merriweather, rarely used well</td><td><b>Source Serif 4</b> for display</td><td>A serif used with intent signals editorial care; the Source super-family stays cohesive with the body sans.</td></tr>
         <tr><td>Primary color</td><td>Saturated federal blue</td><td><b>Evergreen #1F6F5C</b></td><td>Calmer and more humane than institutional blue, still unmistakably civic.</td></tr>
         <tr><td>Canvas</td><td>White / cool gray</td><td><b>Warm paper #FBFAF8</b></td><td>Softer, less clinical; easier for long case review.</td></tr>
         <tr><td>Type scale</td><td>Broad, utilitarian</td><td><b>Tighter ~1.2 scale</b></td><td>More refined hierarchy; less shouting.</td></tr>
-        <tr><td>Density</td><td>Form-first</td><td><b>Content-first</b></td><td>Optimized for reading a determination, not filling a form.</td></tr>
+        <tr><td>Density</td><td>Form-first</td><td><b>Content-first</b></td><td>Optimized for reading a determination, where a form layout would waste the space.</td></tr>
       </table>
     </section>
 
     <section class="cv" id="type">
       <h2>Typography</h2>
-      <p class="intro">Source Sans 3 for everything you operate, Source Serif 4 for the things you read, Roboto Mono for the things you cite. The serif is the elevation: government interfaces almost never trust a serif, and used only for display it reads as care, not nostalgia.</p>
+      <p class="intro">Source Sans 3 for everything you operate, Source Serif 4 for the things you read, Roboto Mono for the things you cite. The serif is the elevation: government interfaces almost never trust a serif, and used only for display it reads as care.</p>
       <div class="specimen-type">
         <div><span class="lab">serif · display</span><span style="font-family:var(--font-serif); font-size:31px; line-height:1.1;">Eligibility, made legible</span></div>
         <div><span class="lab">sans · text-lg 17</span><span style="font-size:var(--text-lg);">The agent recommends; a caseworker decides.</span></div>
@@ -111,7 +111,7 @@
 
     <section class="cv" id="color">
       <h2>Color</h2>
-      <p class="intro">Tokens are roles, not paint: <code>primary</code>, <code>ink</code>, <code>base</code>, the warm accents, and the state colors. Color always carries meaning — success, caution, error — and never decorates. Every pairing clears AA contrast.</p>
+      <p class="intro">Tokens are roles rather than paint: <code>primary</code>, <code>ink</code>, <code>base</code>, the warm accents, and the state colors. Color always carries meaning (success, caution, error) and never decorates. Every pairing clears AA contrast.</p>
       <h3 style="font-size:var(--text-sm); color:var(--base); text-transform:uppercase; letter-spacing:0.04em; margin:0 0 10px;">Theme roles</h3>
       <div class="swatches">
         <div class="sw"><div class="chip-color" style="background:var(--ink)"></div><div class="meta"><b>ink</b><code>#14181F</code></div></div>
@@ -130,7 +130,7 @@
         <div class="sw"><div class="chip-color" style="background:var(--warning)"></div><div class="meta"><b>warning</b><code>#8A5314</code></div></div>
         <div class="sw"><div class="chip-color" style="background:var(--error)"></div><div class="meta"><b>error</b><code>#963232</code></div></div>
       </div>
-      <h3 style="font-size:var(--text-sm); color:var(--base); text-transform:uppercase; letter-spacing:0.04em; margin:18px 0 10px;">Space — 8px base</h3>
+      <h3 style="font-size:var(--text-sm); color:var(--base); text-transform:uppercase; letter-spacing:0.04em; margin:18px 0 10px;">Space: 8px base</h3>
       <div class="space-row"><span class="lab">s-1 · 8</span><span class="bar" style="width:8px"></span></div>
       <div class="space-row"><span class="lab">s-2 · 16</span><span class="bar" style="width:16px"></span></div>
       <div class="space-row"><span class="lab">s-3 · 24</span><span class="bar" style="width:24px"></span></div>
@@ -144,11 +144,11 @@
 
       <div class="comp">
         <h3>Summary box</h3>
-        <p class="use">The headline outcome of a page, set apart. Use it for the one thing a reader must take away — here, the recommendation and its reason.</p>
+        <p class="use">The headline outcome of a page, set apart. Use it for the one thing a reader must take away, here the recommendation and its reason.</p>
         <div class="demo"><div class="summary-box">Routed to human review: one document conflicts with the stated application. The agent does not decide; a caseworker will.</div></div>
         <div class="dodont">
           <div class="do"><b>Do</b> use one per view, at the top, for the decisive takeaway.</div>
-          <div class="dont"><b>Avoid</b> stacking several — if everything is summarized, nothing is.</div>
+          <div class="dont"><b>Avoid</b> stacking several. If everything is summarized, nothing is.</div>
         </div>
       </div>
 
@@ -156,10 +156,10 @@
         <h3>Alert</h3>
         <p class="use">A state that needs attention, in four meanings. The left bar and icon carry the meaning so it never rests on color alone.</p>
         <div class="demo">
-          <div class="alert info"><i class="ti ti-info-circle"></i><span>Screening only — not a determination.</span></div>
+          <div class="alert info"><i class="ti ti-info-circle"></i><span>Screening only. This is not a determination.</span></div>
           <div class="alert success"><i class="ti ti-check"></i><span>Eligible on stated income.</span></div>
-          <div class="alert warning"><i class="ti ti-alert-triangle"></i><span>Income claimed but unverified — routed to human review.</span></div>
-          <div class="alert error"><i class="ti ti-x"></i><span>Malformed application — cannot screen.</span></div>
+          <div class="alert warning"><i class="ti ti-alert-triangle"></i><span>Income claimed but unverified, routed to human review.</span></div>
+          <div class="alert error"><i class="ti ti-x"></i><span>Malformed application, cannot screen.</span></div>
         </div>
         <div class="dodont">
           <div class="do"><b>Do</b> match the state to real severity; reserve error for blocking failures.</div>
@@ -179,7 +179,7 @@
 
       <div class="comp">
         <h3>Step indicator</h3>
-        <p class="use">Progress through a defined process, with the meaningful step emphasized. Here it makes the agent pipeline — and its deterministic boundary — visible.</p>
+        <p class="use">Progress through a defined process, with the meaningful step emphasized. Here it makes the agent pipeline (and its deterministic boundary) visible.</p>
         <div class="demo"><div class="flow">
           <span class="node"><b>1</b><span>ingest</span></span><span class="seg"></span>
           <span class="node"><b>2</b><span>extract</span></span><span class="seg"></span>
@@ -201,7 +201,7 @@
 
     <section class="cv" id="using">
       <h2>Using Civil</h2>
-      <p class="intro">The system is a set of CSS custom properties — the tokens — plus component classes. Build with the tokens, never raw hex, so a palette or scale change is one edit. Reference the role, not the value:</p>
+      <p class="intro">The system is a set of CSS custom properties (the tokens) plus component classes. Build with the tokens, never raw hex, so a palette or scale change is one edit. Reference the role rather than the value:</p>
       <pre class="code"><span class="tok">.recommendation</span> {
   color: <span class="tok">var(--ink)</span>;
   background: <span class="tok">var(--surface)</span>;

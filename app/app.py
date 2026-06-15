@@ -28,8 +28,8 @@ from src.tools.extraction import truth_extractor
 CASES = Path(__file__).resolve().parent.parent / "data" / "cases"
 
 ROUTE_STYLE = {
-    "clear_eligible": ("✅ Clear — eligible (recommendation)", "success"),
-    "clear_ineligible": ("⛔ Clear — ineligible (recommendation)", "warning"),
+    "clear_eligible": ("✅ Eligible (recommendation)", "success"),
+    "clear_ineligible": ("⛔ Ineligible (recommendation)", "warning"),
     "needs_human_review": ("🧑‍⚖️ Needs human review", "info"),
 }
 

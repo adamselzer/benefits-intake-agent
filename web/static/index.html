@@ -13,7 +13,7 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <a class="brand-mark" href="https://adamselzer.github.io/safety-net-ai/" title="Safety-Net AI — the suite">Safety-Net AI</a>
+      <a class="brand-mark" href="https://adamselzer.github.io/safety-net-ai/" title="Safety-Net AI, the suite">Safety-Net AI</a>
       <span class="brand-eyebrow">Intake triage · food assistance</span>
     </div>
     <nav class="tabs">
@@ -45,32 +45,32 @@
 
   <div id="panel-about" class="panel" hidden>
     <article class="prose">
-      <p class="lead">An intake agent that reads a messy benefits application, checks it against the rules, and hands a caseworker a recommendation — without ever deciding eligibility itself, and without ever denying anyone.</p>
+      <p class="lead">An intake agent that reads a messy benefits application, checks it against the rules, and hands a caseworker a recommendation. It never decides eligibility itself, and it never denies anyone.</p>
 
       <h2>Who it is for, and where it runs</h2>
-      <p>This is not an app a caseworker opens between cases. State systems of record (Bridges, CalSAWS) already run the eligibility math; the value is upstream, in the messy uploaded documents and the triage of what needs a human. So the tool runs as a document-intake layer on incoming SNAP (food assistance) applications: it reads and cross-checks the uploads — pay stubs, leases, utility bills, IDs — and writes its flags into the case record rather than replacing it.</p>
-      <p>It produces two surfaces, for two users. A queue owner (or an auto-assignment step) gets a worklist ordered by what needs attention. A caseworker, on a flagged case, gets a review surface: the outcome, exactly what they must resolve, the cited basis, and the evidence on demand. The dangerous error is not a false denial (the agent cannot deny) but a case quietly cleared that should have reached a person — and that is the number the design keeps at zero.</p>
+      <p>This is not an app a caseworker opens between cases. State systems of record (Bridges, CalSAWS) already run the eligibility math, and the value is upstream, in the messy uploaded documents and the triage of what needs a human. So the tool runs as a document-intake layer on incoming SNAP (food assistance) applications. It reads and cross-checks the uploads (pay stubs, leases, utility bills, IDs) and writes its flags into the case record rather than replacing it.</p>
+      <p>It produces two surfaces, for two users. A queue owner (or an auto-assignment step) gets a worklist ordered by what needs attention. A caseworker, on a flagged case, gets a review surface: the outcome, exactly what they must resolve, the cited basis, and the evidence on demand. The dangerous error is a case quietly cleared that should have reached a person (the agent cannot deny), and that is the number the design keeps at zero.</p>
 
       <h2>What it does</h2>
       <ol class="steps">
-        <li><b>Ingest</b> — validate the stated application.</li>
-        <li><b>Extract</b> — read each document with the model and pull structured fields.</li>
-        <li><b>Validate</b> — cross-check documents against the stated application, surface conflicts, flag anything that could not be verified.</li>
-        <li><b>Screen</b> — hand the facts to a deterministic rules engine that returns an eligibility determination with a rule trace and policy citations.</li>
-        <li><b>Route</b> — clear-eligible, clear-ineligible, or needs-human-review. There is no "denied".</li>
+        <li><b>Ingest.</b> Validate the stated application.</li>
+        <li><b>Extract.</b> Read each document with the model and pull structured fields.</li>
+        <li><b>Validate.</b> Cross-check documents against the stated application, surface conflicts, and flag anything that could not be verified.</li>
+        <li><b>Screen.</b> Hand the facts to a deterministic rules engine that returns an eligibility determination with a rule trace and policy citations.</li>
+        <li><b>Route.</b> Clear-eligible, clear-ineligible, or needs-human-review. There is no "denied".</li>
       </ol>
 
       <h2>Technical decisions</h2>
 
       <div class="dec">
-        <div class="dec-h">The eligibility test is a tool call, not model reasoning</div>
-        <p>The screen step calls a separate, deterministic rules-as-code engine that returns a determination with citations. The model orchestrates; tested, auditable code decides.</p>
+        <div class="dec-h">The eligibility test is a tool call</div>
+        <p>The screen step calls a separate, deterministic rules-as-code engine that returns a determination with citations. The model orchestrates, and tested, auditable code decides.</p>
         <p class="alt">Instead of: letting the model reason about eligibility from policy text. In government, "the model said so" is not a basis for denying benefits.</p>
       </div>
 
       <div class="dec">
-        <div class="dec-h">A LangGraph pipeline, so the boundary is inspectable</div>
-        <p>Each step is a named node with explicit edges, which makes the point where control leaves the model and enters deterministic code a thing you can see, not a claim in a README.</p>
+        <div class="dec-h">A small, explicit graph of steps</div>
+        <p>The pipeline (built with LangGraph) is a set of named nodes with explicit edges. The point where control leaves the model and enters deterministic code is visible in the graph, so the boundary is something you can inspect.</p>
         <p class="alt">Instead of: one opaque prompt that does extraction, screening, and routing at once.</p>
       </div>
 
@@ -81,14 +81,14 @@
       </div>
 
       <div class="dec">
-        <div class="dec-h">Composition over MCP</div>
-        <p>The rules engine is a separate project exposed over the Model Context Protocol. This app calls it directly for reliability, and ships a demo of the same screen performed over MCP — the deployable shape, where the rules core versions and deploys on its own.</p>
+        <div class="dec-h">Composition over MCP (the Model Context Protocol)</div>
+        <p>The rules engine is a separate project exposed over MCP. This app calls it directly for reliability, and ships a demo of the same screen performed over MCP, the deployable shape, where the rules core versions and deploys on its own.</p>
         <p class="alt">Instead of: copying the eligibility logic into the agent, where it would drift out of sync with the source of truth.</p>
       </div>
 
       <div class="dec">
         <div class="dec-h">Extraction is injectable; evaluation comes first</div>
-        <p>The document reader is a dependency: Claude vision in production, a deterministic stand-in for tests and offline runs. That lets the safety logic be verified without a key, and the eval measures the metric that maps to harm — the rate at which a should-review case is waved through.</p>
+        <p>The document reader is a dependency: Claude vision in production, a deterministic stand-in for tests and offline runs. That lets the safety logic be verified without a key, and the eval measures the metric that maps to harm, the rate at which a should-review case is waved through.</p>
         <p class="alt">Instead of: hard-wiring the model call into the graph and demoing it once by hand.</p>
       </div>
 
@@ -96,25 +96,25 @@
 
       <div class="dec">
         <div class="dec-h">The boundary is the layout</div>
-        <p>The recommendation puts "what the model read" beside "what the rules decided". The single most important idea in the system — where probabilistic reading ends and deterministic deciding begins — is the structure of the screen, not a sentence.</p>
+        <p>The recommendation puts "what the model read" beside "what the rules decided". The most important idea in the system, where probabilistic reading ends and deterministic deciding begins, is built into the structure of the screen.</p>
         <p class="alt">Instead of: a flat list of fields that hides which were read by a model and which were decided by code.</p>
       </div>
 
       <div class="dec">
         <div class="dec-h">Provenance is a first-class element</div>
-        <p>Every value carries a source tag — document, rule, or stated-but-unverified — and IDs and citations are set in monospace, like audit artifacts. A caseworker (or an auditor) can trace any claim to where it came from.</p>
+        <p>Every value carries a source tag (document, rule, or stated-but-unverified), and IDs and citations are set in monospace, like audit artifacts. A caseworker or an auditor can trace any claim to where it came from.</p>
         <p class="alt">Instead of: presenting model output and policy output as if they were the same kind of fact.</p>
       </div>
 
       <div class="dec">
         <div class="dec-h">Cut the telemetry that carried no signal</div>
-        <p>An earlier version drew a confidence bar for every extracted field. On clean inputs every bar was full and identical — a rigor-shaped decoration. It was removed. The emphasis belongs on the exception: the unverified field that routes a case to a human.</p>
+        <p>An earlier version drew a confidence bar for every extracted field. On clean inputs every bar was full and identical, a rigor-shaped decoration. It was removed. The emphasis belongs on the exception: the unverified field that routes a case to a human.</p>
         <p class="alt">Instead of: keeping a metric on screen because it looks thorough. A uniform "all good" indicator is noise at best and dishonest at worst.</p>
       </div>
 
       <div class="dec">
         <div class="dec-h">A bespoke front-end where it earns it</div>
-        <p>This surface is hand-built rather than a themed framework default, because the layout, the provenance system, and the restraint are the work. The portfolio's other projects stay on a lighter framework where that craft would not pay off.</p>
+        <p>This surface is hand-built rather than a themed framework default, because the layout and the provenance system carry the work. The portfolio's other projects stay on a lighter framework where that craft would not pay off.</p>
         <p class="alt">Instead of: four identical framework apps. Quality where it matters beats uniformity.</p>
       </div>
 
@@ -131,18 +131,18 @@
 
   <div id="panel-system" class="panel" hidden>
     <div class="guide">
-      <p class="lead">Civil — a design system in the USWDS lineage, elevated.</p>
-      <p class="sub">It keeps what makes the U.S. Web Design System trustworthy — an open civic typeface, grade-based color tokens in semantic roles, an 8px spacing scale, and accessible, plain components — and refines it past what a government site would ship: a serif used for display, an evergreen primary in place of federal blue, a warm-paper canvas, and a tighter type scale.</p>
+      <p class="lead">Civil, a design system in the USWDS lineage, elevated.</p>
+      <p class="sub">It keeps what makes the U.S. Web Design System trustworthy (an open civic typeface, grade-based color tokens in semantic roles, an 8px spacing scale, and accessible, plain components) and refines it past what a government site would ship: a serif used for display, an evergreen primary in place of federal blue, a warm-paper canvas, and a tighter type scale.</p>
 
       <h2>Typography</h2>
-      <h3>Display — Source Serif 4</h3>
+      <h3>Display: Source Serif 4</h3>
       <div style="font-family:var(--font-serif); font-size:var(--text-3xl); line-height:1.15; margin-bottom:6px;">Eligibility, made legible</div>
-      <h3>UI &amp; body — Source Sans 3</h3>
+      <h3>UI and body: Source Sans 3</h3>
       <div class="scale-row"><span class="lab">text-2xl 25</span><span style="font-size:var(--text-2xl)">The agent recommends</span></div>
       <div class="scale-row"><span class="lab">text-lg 17</span><span style="font-size:var(--text-lg)">A caseworker decides</span></div>
       <div class="scale-row"><span class="lab">text-md 15</span><span style="font-size:var(--text-md)">Net monthly income is at or below the limit.</span></div>
       <div class="scale-row"><span class="lab">text-sm 13</span><span style="font-size:var(--text-sm)">Routed to human review.</span></div>
-      <h3>Mono — Roboto Mono (ids, citations, figures)</h3>
+      <h3>Mono: Roboto Mono (ids, citations, figures)</h3>
       <div style="font-family:var(--font-mono); font-size:var(--text-sm);">case-021 · 7 CFR 273.9(a)(2) · $1,763</div>
 
       <h2>Color tokens</h2>
@@ -165,7 +165,7 @@
         <div class="sw"><div class="chip-color" style="background:var(--error)"></div><div class="meta"><b>error</b><code>#963232</code></div></div>
       </div>
 
-      <h2>Spacing — 8px base unit</h2>
+      <h2>Spacing: 8px base unit</h2>
       <div class="space-row"><span class="lab">s-1 · 8</span><span class="bar" style="width:8px"></span></div>
       <div class="space-row"><span class="lab">s-2 · 16</span><span class="bar" style="width:16px"></span></div>
       <div class="space-row"><span class="lab">s-3 · 24</span><span class="bar" style="width:24px"></span></div>
@@ -179,10 +179,10 @@
       <h3>Tags</h3>
       <div class="specimen"><span class="chip"><i class="ti ti-file-text"></i> Lease</span><span class="chip mono">BEM 213</span><span class="chip warn"><i class="ti ti-alert-triangle"></i> unverified</span></div>
       <h3>Alerts</h3>
-      <div class="alert info"><i class="ti ti-info-circle"></i><span>Screening only — not a determination.</span></div>
+      <div class="alert info"><i class="ti ti-info-circle"></i><span>Screening only. This is not a determination.</span></div>
       <div class="alert success"><i class="ti ti-check"></i><span>Eligible on stated income.</span></div>
-      <div class="alert warning"><i class="ti ti-alert-triangle"></i><span>Income claimed but unverified — routed to human review.</span></div>
-      <div class="alert error"><i class="ti ti-x"></i><span>Malformed application — cannot screen.</span></div>
+      <div class="alert warning"><i class="ti ti-alert-triangle"></i><span>Income claimed but unverified, routed to human review.</span></div>
+      <div class="alert error"><i class="ti ti-x"></i><span>Malformed application, cannot screen.</span></div>
       <h3>Summary box</h3>
       <div class="summary-box">Routed to human review: one document conflicts with the stated application. The agent does not decide; a caseworker will.</div>
       <h3>Step indicator</h3>

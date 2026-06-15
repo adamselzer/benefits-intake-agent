@@ -39,9 +39,9 @@ These two task models map one-to-one to the two surfaces (case review, queue).
 
 ## Organization systems
 
-Schemes are named so they are deliberate, not accidental (Rosenfeld & Morville:
-exact schemes — alphabetical/chronological/status; ambiguous schemes —
-task/audience/topic):
+Schemes are named here on purpose (Rosenfeld & Morville distinguish exact schemes,
+like alphabetical, chronological, or status, from ambiguous schemes, like task,
+audience, or topic):
 
 - **Queue → by task-status.** Needs review, then Cleared, with counts. The user's
   question is "what needs me," so status is the primary axis. Within a group, by
@@ -54,7 +54,7 @@ task/audience/topic):
 - **Documentation → by audience.** Operate it (Live demo), understand it (How it
   works), reuse it (Design system).
 
-## Labeling — controlled vocabulary
+## Labeling: controlled vocabulary
 
 One concept, one name, everywhere. Product chrome uses the worker's language;
 implementation jargon is confined to the explanatory surfaces.
@@ -68,8 +68,8 @@ implementation jargon is confined to the explanatory surfaces.
 | Extracted facts | **evidence** | data, fields |
 | Sourcing of a fact | **provenance** | source, origin |
 
-Implementation terms — "agents", "LangGraph", "MCP", "rules-as-code" — belong in
-**How it works**, not in the working surface's chrome. (Applied: the app's eyebrow
+Implementation terms ("agents", "LangGraph", "MCP", "rules-as-code") belong in
+**How it works** rather than the working surface's chrome. (Applied: the app's eyebrow
 now reads as the product, "Intake triage · food assistance", not "Agents".)
 
 ## Navigation and wayfinding
@@ -103,8 +103,8 @@ applicant. Search is a scale feature, deliberately deferred, not an oversight.
 1. **Suite-level IA is absent.** Four tools + a design system + a portfolio
    narrative, with no navigable hub, no cross-linking, and inconsistent navigation
    (this app has three tabs; the Streamlit tools have two; labels differ). Architecting
-   the portfolio as one information space — a hub with consistent global nav and a
-   shared vocabulary — is the largest remaining IA task.
+   the portfolio as one information space (a hub with consistent global nav and a
+   shared vocabulary) is the largest remaining IA task.
 2. **The controlled vocabulary is not yet enforced** across the sibling apps.
 3. **No search**, by deliberate deferral.
 

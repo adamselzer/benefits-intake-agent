@@ -1,4 +1,4 @@
-# Portfolio notes — benefits-intake-agent
+# Portfolio notes: benefits-intake-agent
 
 A plain-language account of what this project is and the judgment behind it.
 
@@ -19,16 +19,15 @@ to look.
 
 ## Why it matters in this domain
 
-This is the highest-demand, least-solved FDE pattern, and the safety-net framing is
-where it earns its seat. An intake agent that auto-denies on a misread number is
-not a productivity tool, it is a harm. So the interesting questions are not "can the
-model extract fields" but "what happens when extraction is wrong, how do you bound
-that error, and where do you hand control back to code." The whole design is an
-answer to those.
+This is the highest-demand, least-solved pattern in applied AI, and the safety-net
+framing is where it earns its seat. An intake agent that auto-denies on a misread
+number does real harm, so productivity is never the first concern. The questions
+that matter are what happens when extraction is wrong, how you bound that error, and
+where you hand control back to code. The whole design is an answer to those.
 
 ## Key design decisions and tradeoffs
 
-1. **The no-deny invariant is structural, not a guideline.** The route enum has no
+1. **The no-deny invariant is structural.** The route enum has no
    denial value, and a test asserts none is ever produced. *Rejected:* a prompt
    instruction telling the model not to deny. Prompts drift; a type and a test do
    not. The worst outcome is `needs_human_review`.
@@ -37,15 +36,15 @@ answer to those.
    per field, and a low-confidence financial field forces human review. *Rejected:*
    trusting extraction and screening on whatever the model returned. In this domain
    a confidently-wrong income figure is the failure mode, so uncertainty has to be a
-   first-class signal, not a footnote.
+   first-class signal that can stop the screen.
 
-3. **The eligibility test is a deterministic tool call, not model reasoning.** The
+3. **The eligibility test is a deterministic tool call.** The
    screen node calls the rules-as-code core. *Rejected:* letting the model reason
    about eligibility from the policy. The model orchestrates; auditable code
    decides. This is the single most important boundary in the project, and it is a
    named node in the graph.
 
-4. **Conflicts are surfaced, never reconciled.** When a document disagrees with the
+4. **Conflicts are surfaced and routed to a human.** When a document disagrees with the
    application, the agent reports both and routes to a human. *Rejected:* having the
    model pick the "more likely" value. Silently choosing is exactly how a wrongful
    determination happens.

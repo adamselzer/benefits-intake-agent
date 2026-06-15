@@ -1,4 +1,4 @@
-# Website blurb — benefits-intake-agent
+# Website blurb: benefits-intake-agent
 
 Drop-in copy for a portfolio page. A short paragraph plus highlight bullets.
 
