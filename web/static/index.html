@@ -8,12 +8,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css" />
-<link rel="stylesheet" href="/styles.css?v=6" />
+<link rel="stylesheet" href="/styles.css?v=7" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
-      <span class="brand-mark">Safety-Net AI</span>
+      <a class="brand-mark" href="https://adamselzer.github.io/safety-net-ai/" title="Safety-Net AI — the suite">Safety-Net AI</a>
       <span class="brand-eyebrow">Intake triage · food assistance</span>
     </div>
     <nav class="tabs">
@@ -33,6 +33,7 @@
             <span>Vision</span>
           </label>
         </div>
+        <input id="case-filter" class="case-filter" type="search" placeholder="Filter cases…" aria-label="Filter cases" />
         <ul class="case-list" id="cases"></ul>
         <p class="rail-foot">Synthetic cases, no PII</p>
       </aside>
@@ -197,6 +198,6 @@
     </div>
   </div>
 
-  <script src="/app.js?v=6"></script>
+  <script src="/app.js?v=7"></script>
 </body>
 </html>

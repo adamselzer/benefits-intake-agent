@@ -32,6 +32,22 @@ async function init() {
   ul.querySelectorAll(".case-row").forEach((el) =>
     el.addEventListener("click", () => select(el, el.dataset.id))
   );
+
+  const filter = document.getElementById("case-filter");
+  filter.addEventListener("input", () => {
+    const q = filter.value.trim().toLowerCase();
+    ul.querySelectorAll(".case-row").forEach((row) => {
+      row.style.display = row.textContent.toLowerCase().includes(q) ? "" : "none";
+    });
+    ul.querySelectorAll(".q-group").forEach((g) => {
+      let n = g.nextElementSibling, any = false;
+      while (n && !n.classList.contains("q-group")) {
+        if (n.style.display !== "none") any = true;
+        n = n.nextElementSibling;
+      }
+      g.style.display = any ? "" : "none";
+    });
+  });
 }
 
 function group(title, arr) {

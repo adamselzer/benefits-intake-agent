@@ -37,7 +37,7 @@ st.set_page_config(page_title="Benefits intake agent", layout="wide")
 apply_theme(st)
 header(
     st,
-    "Safety-Net AI · Agents",
+    "Intake triage · food assistance",
     "Benefits intake agent",
     "The agent reads the application and verification documents, screens via a "
     "deterministic rules core, and hands a caseworker a recommendation. It never "
